@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 class Produto
 {
     private $id;
@@ -36,7 +38,8 @@ class Produto
             $resultado["msg"] = "Sucesso ao inserir produto";
             $resultado["cod"] = 1;
             $resultado["style"] = "alert-success";
-
+            $_SESSION["resultado"] = $resultado;
+            
         } catch (PDOException $e) {
 
             $resultado["msg"] = "Erro ao inserir produto" . $e->getMessage();;
@@ -47,13 +50,3 @@ class Produto
         return $resultado;
     }
 }
-
-//echo "# restaurant" >> README.md
-//git init
-//git add README.md
-//git commit -m "first commit"
-//git branch -M main
-//git remote add origin https://github.com/Vitor09Matos/restaurant.git
-//git push -u origin main 
-
-// teste de envio ao git
