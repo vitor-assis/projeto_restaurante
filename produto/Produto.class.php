@@ -21,30 +21,29 @@ class Produto
         $this->foto = $valores["foto_produto"];
         $this->info = $valores["info_produto"];
         $this->id_usuario = $_SESSION["id_usuario"];
-
     }
 
-    function selecionar($id_prod = null){
+    function selecionar($id_prod = null)
+    {
 
         $where_cod = "";
-        if(isset($id_prod)) {
-            $where_cod = " AND id = ".$id_prod;
+        if (isset($id_prod)) {
+            $where_cod = " AND id = " . $id_prod;
         }
-    
+
         try {
             include("conexao_bd.php");
-            
+
             $consulta = $conn->prepare("SELECT * FROM produtos WHERE situacao LIKE 'habilitado'" . $where_cod);
-            $consulta->execute(); 
+            $consulta->execute();
             $resultado = $consulta->fetchAll();
-    
         } catch (PDOException $e) {
-    
+
             $resultado["msg"] = "Erro" . $e->getMessage();;
             $resultado["cod"] = 0;
             $resultado["style"] = "alert-danger";
         }
-    
+
         $conn = null;
         return $resultado;
     }
@@ -53,7 +52,7 @@ class Produto
     {
         session_start();
         $this->receberValoresDoPost($produto);
-        
+
         try {
             include("conexao_bd.php");
 
@@ -65,7 +64,6 @@ class Produto
             $resultado["msg"] = "Sucesso ao inserir produto";
             $resultado["cod"] = 1;
             $resultado["style"] = "alert-success";
-            
         } catch (PDOException $e) {
 
             $resultado["msg"] = "Erro ao inserir produto" . $e->getMessage();;
@@ -76,7 +74,8 @@ class Produto
         return $resultado;
     }
 
-    function atualizar($produto){
+    function atualizar($produto)
+    {
 
         session_start();
         $this->receberValoresDoPost($produto);
@@ -84,45 +83,46 @@ class Produto
         try {
 
             include("conexao_bd.php");
-    
+
             $sql = "UPDATE produtos SET nome = ?, categoria = ?, valor = ?, info_adicional = ?, momento = now() WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$this->nome, $this->categoria, $this->valor, $this->info, $this->id_prod]);
-    
+
             $resultado["msg"] = "Produto alterado com sucesso!";
             $resultado["cod"] = 1;
             $resultado["style"] = "alert-success";
         } catch (PDOException $e) {
-    
+
             $resultado["msg"] = "Erro ao alterar produto" . $e->getMessage();;
             $resultado["cod"] = 0;
             $resultado["style"] = "alert-danger";
         }
-    
+
         $conn = null;
         return $resultado;
     }
 
-    function remover($id_prod){
+    function remover($id_prod)
+    {
 
         try {
-    
+
             include("conexao_bd.php");
-    
+
             $sql = "UPDATE produtos SET situacao = 'desabilitado' WHERE produtos.id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$id_prod]);
-    
+
             $resultado["msg"] = "Produto removido com sucesso!";
             $resultado["cod"] = 1;
             $resultado["style"] = "alert-success";
         } catch (PDOException $e) {
-    
+
             $resultado["msg"] = "Erro ao remover produto" . $e->getMessage();;
             $resultado["cod"] = 0;
             $resultado["style"] = "alert-danger";
         }
-    
+
         $conn = null;
         return $resultado;
     }
