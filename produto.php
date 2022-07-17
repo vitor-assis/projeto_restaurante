@@ -5,6 +5,9 @@ if (isset($_SESSION["nome_usuario"])) :
     <?php
         require_once("produto/ProdutoController.class.php");
         $produto_control = new ProdutoController();
+        if(count($_POST) > 0){
+            $resultado = $produto_control->cadastrar($_POST);
+        }
     ?>
 
     <!DOCTYPE html>
@@ -21,7 +24,7 @@ if (isset($_SESSION["nome_usuario"])) :
 
     <body>
         <div class="container">
-            <form action="produto_cadastrar.php" method="post">
+            <form action="produto.php" method="post">
                 <h2>Cadastro de produtos</h2>
                 <br>
                 <div class="form-group">

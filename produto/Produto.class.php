@@ -14,7 +14,9 @@ class Produto
 
     function receberValoresDoPost($valores)
     {
-        $this->id_prod = $valores["id_prod"];
+        if(!isset($_SESSION["id_usuatio"])) session_start();
+
+        $this->id_prod = isset($valores["id_prod"]) ? $valores["id_prod"] : 0;
         $this->nome = $valores["nome_produto"];
         $this->categoria = $valores["categoria_produto"];
         $this->valor = $valores["valor_produto"];

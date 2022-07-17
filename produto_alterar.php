@@ -1,6 +1,10 @@
 <?php
 session_start();
-if (isset($_SESSION["nome_usuario"])) :
+if (isset($_SESSION["nome_usuario"])): ?>
+
+<?php
+    require_once("produto/ProdutoController.class.php");
+    $produto_control = new ProdutoController();
 ?>
     <!DOCTYPE html>
     <html lang="pt-br">
@@ -17,8 +21,8 @@ if (isset($_SESSION["nome_usuario"])) :
     <body>
         <div class="container">
             <?php
-            $id_prod = $_GET["id_prod"];
-            include('selecionar_produtos.php');
+                $id_prod = $_GET["id_prod"];
+                $produtos = $produto_control -> selecionar($id_prod);
             ?>
 
             <form action="alterar_produto.php" method="post">
