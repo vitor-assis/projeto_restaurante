@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 
 if (COUNT($_POST) > 0) {
 

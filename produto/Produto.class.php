@@ -16,7 +16,7 @@ class Produto
     {
         $this->id_prod = $valores["id_prod"];
         $this->nome = $valores["nome_produto"];
-        $this->categoria = $valores["categoria_produto"]; 
+        $this->categoria = $valores["categoria_produto"];
         $this->valor = $valores["valor_produto"];
         $this->foto = $valores["foto_produto"];
         $this->info = $valores["info_produto"];
