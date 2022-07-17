@@ -2,6 +2,10 @@
     session_start();
     if(isset($_SESSION["nome_usuario"])):
 ?>
+<?php
+    require_once('produto/ProdutoController.class.php');
+    $produto_control = new ProdutoController();
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,7 +21,7 @@
 
 <body>
     <div class="container">
-        <form action="cadastrar_produto.php" method="post">
+        <form action="produto_cadastrar.php" method="post">
             <h2>Cadastro de produtos</h2>
             <br>
             <div class="form-group">
@@ -54,7 +58,9 @@
             <?php endif ?>
         </form>
         <br><br>
-        <?php include("selecionar_produtos.php"); ?>
+
+        <?php $produtos = $produto_control->selecionar() ?>
+
         <?php if (COUNT($produtos) > 0) : ?>
             <h4>Produtos cadastrados</h4>
             <table class="table">
@@ -78,8 +84,8 @@
                         <td><?= $p["info_adicional"]; ?></td>
                         <td><?= $p["momento"]; ?></td>
                         <td>
-                            <a class="btn btn-warning btn-sm" href="produto_alterar_form.php?id_prod=<?=$p["id"];?>">Alterar</a>
-                            <a class="btn btn-danger btn-sm" onclick="return confirm('Confirma a remoção do produto <?= $p['nome']; ?>?')" href="remover_produto.php?id_prod=<?=$p["id"];?>">Remover</a>
+                            <a class="btn btn-warning btn-sm" href="produto_alterar.php?id_prod=<?=$p["id"];?>">Alterar</a>
+                            <a class="btn btn-danger btn-sm" onclick="return confirm('Confirma a remoção do produto <?= $p['nome']; ?>?')" href="produto_remover.php?id_prod=<?=$p["id"];?>">Remover</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -1,0 +1,13 @@
+<?php
+
+require_once("Produto.class.php");
+
+class ProdutoController
+{
+
+    function selecionar(){
+        $produto = new Produto();
+        return $produto -> selecionar();
+    }
+    
+}
