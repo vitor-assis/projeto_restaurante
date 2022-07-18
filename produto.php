@@ -3,11 +3,11 @@ session_start();
 if (isset($_SESSION["nome_usuario"])) :
 ?>
     <?php
-        require_once("produto/ProdutoController.class.php");
-        $produto_control = new ProdutoController();
-        if(count($_POST) > 0){
-            $resultado = $produto_control->cadastrar($_POST);
-        }
+    require_once("produto/ProdutoController.class.php");
+    $produto_control = new ProdutoController();
+    if (count($_POST) > 0) {
+        $resultado = $produto_control->cadastrar($_POST);
+    }
     ?>
 
     <!DOCTYPE html>
@@ -66,7 +66,7 @@ if (isset($_SESSION["nome_usuario"])) :
 
             <?php if (COUNT($produtos) > 0) : ?>
                 <h4>Produtos cadastrados</h4>
-                <table class="table">
+                <table id="tab_produto" class="table">
                     <tr>
                         <th>ID</th>
                         <th>Foto</th>
@@ -78,7 +78,7 @@ if (isset($_SESSION["nome_usuario"])) :
                         <th>Editar</th>
                     </tr>
                     <?php foreach ($produtos as $p) : ?>
-                        <tr>
+                        <tr id="produto<?= $p['id'] ?>">
                             <td><?= $p["id"]; ?></td>
                             <td><?= $p["foto"]; ?></td>
                             <td><?= $p["nome"]; ?></td>
@@ -88,7 +88,7 @@ if (isset($_SESSION["nome_usuario"])) :
                             <td><?= $p["momento"]; ?></td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="produto_alterar.php?id_prod=<?= $p["id"]; ?>">Alterar</a>
-                                <a class="btn btn-danger btn-sm" onclick="return confirm('Confirma a remoção do produto <?= $p['nome']; ?>?')" href="produto_remover.php?id_prod=<?= $p["id"]; ?>">Remover</a>
+                                <a class="btn btn-danger btn-sm" onclick="removerProduto('<?= $p['nome'] ?>', <?= $p['id'] ?>)">Remover</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -98,6 +98,27 @@ if (isset($_SESSION["nome_usuario"])) :
     </body>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    <script>
+        function removerProduto(nomeProduto, idProduto) {
+            if (confirm("Deseja remover o produto " + nomeProduto + "?")) {
+                var ajax = new XMLHttpRequest();
+
+                ajax.responseType = "json";
+                ajax.open("GET", "produto_remover.php?id_prod=" + idProduto, true);
+                ajax.send();
+                ajax.addEventListener("readystatechange", function() {
+                    if (ajax.status === 200 && ajax.readyState === 4) {
+                        resposta = ajax.response.msg;
+                        alert(resposta);
+                        var linha = document.getElementById("produto" + idProduto);
+                        linha.parentNode.removeChild(linha);
+                    }
+                });
+            }
+        }
+    </script>
 
     </html>
 <?php else : ?>

@@ -34,7 +34,9 @@ class Produto
         }
 
         try {
-            include("conexao_bd.php");
+            include("bd/BancoDados.class.php");
+            $bd = new BancoDados();
+            $conn = $bd->conectar();
 
             $consulta = $conn->prepare("SELECT * FROM produtos WHERE situacao LIKE 'habilitado'" . $where_cod);
             $consulta->execute();
@@ -56,7 +58,9 @@ class Produto
         $this->receberValoresDoPost($produto);
 
         try {
-            include("conexao_bd.php");
+            include("bd/BancoDados.class.php");
+            $bd = new BancoDados();
+            $conn = $bd->conectar();
 
             $sql = "INSERT INTO produtos (nome, categoria, valor, foto, info_adicional, id_usuario) 
             VALUES (?,?,?,?,?,?)";
@@ -84,7 +88,9 @@ class Produto
 
         try {
 
-            include("conexao_bd.php");
+            include("bd/BancoDados.class.php");
+            $bd = new BancoDados();
+            $conn = $bd->conectar();
 
             $sql = "UPDATE produtos SET nome = ?, categoria = ?, valor = ?, info_adicional = ?, momento = now() WHERE id = ?";
             $stmt = $conn->prepare($sql);
@@ -109,7 +115,9 @@ class Produto
 
         try {
 
-            include("conexao_bd.php");
+            include("bd/BancoDados.class.php");
+            $bd = new BancoDados();
+            $conn = $bd->conectar();
 
             $sql = "UPDATE produtos SET situacao = 'desabilitado' WHERE produtos.id = ?";
             $stmt = $conn->prepare($sql);

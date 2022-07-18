@@ -9,7 +9,9 @@ if (COUNT($_POST) > 0) {
     $senha = $_POST["senha"];
 
     try {
-        include("conexao_bd.php");
+        include("bd/BancoDados.class.php");
+        $bd = new BancoDados();
+        $conn = $bd->conectar();
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
