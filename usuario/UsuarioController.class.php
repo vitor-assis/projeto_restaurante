@@ -45,5 +45,7 @@ class UsuarioController
             $resultado["cod"] = 0;
         }
 
+        return $resultado;
+
     }
 }
