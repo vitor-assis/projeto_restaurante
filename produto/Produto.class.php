@@ -2,6 +2,8 @@
 
 session_start();
 
+include("bd/BancoDados.class.php");
+
 class Produto
 {
     private $id_prod;
@@ -12,9 +14,16 @@ class Produto
     private $info;
     private $id_usuario;
 
+    private $bd;
+
+    function __construct()
+    {
+        $this->bd = new BancoDados();
+    }
+
     function receberValoresDoPost($valores)
     {
-        if(!isset($_SESSION["id_usuatio"])) session_start();
+        if (!isset($_SESSION["id_usuatio"])) session_start();
 
         $this->id_prod = isset($valores["id_prod"]) ? $valores["id_prod"] : 0;
         $this->nome = $valores["nome_produto"];
@@ -34,9 +43,8 @@ class Produto
         }
 
         try {
-            include("bd/BancoDados.class.php");
-            $bd = new BancoDados();
-            $conn = $bd->conectar();
+
+            $conn = $this->bd->conectar();
 
             $consulta = $conn->prepare("SELECT * FROM produtos WHERE situacao LIKE 'habilitado'" . $where_cod);
             $consulta->execute();
@@ -58,9 +66,8 @@ class Produto
         $this->receberValoresDoPost($produto);
 
         try {
-            include("bd/BancoDados.class.php");
-            $bd = new BancoDados();
-            $conn = $bd->conectar();
+
+            $conn = $this->bd->conectar();
 
             $sql = "INSERT INTO produtos (nome, categoria, valor, foto, info_adicional, id_usuario) 
             VALUES (?,?,?,?,?,?)";
@@ -88,9 +95,7 @@ class Produto
 
         try {
 
-            include("bd/BancoDados.class.php");
-            $bd = new BancoDados();
-            $conn = $bd->conectar();
+            $conn = $this->bd->conectar();
 
             $sql = "UPDATE produtos SET nome = ?, categoria = ?, valor = ?, info_adicional = ?, momento = now() WHERE id = ?";
             $stmt = $conn->prepare($sql);
@@ -115,9 +120,7 @@ class Produto
 
         try {
 
-            include("bd/BancoDados.class.php");
-            $bd = new BancoDados();
-            $conn = $bd->conectar();
+            $conn = $this->bd->conectar();
 
             $sql = "UPDATE produtos SET situacao = 'desabilitado' WHERE produtos.id = ?";
             $stmt = $conn->prepare($sql);

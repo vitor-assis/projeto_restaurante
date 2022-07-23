@@ -5,16 +5,21 @@ require_once("Produto.class.php");
 class ProdutoController
 {
 
+    private $produto;
+
+    function __construct()
+    {
+        $this->produto = new Produto();
+    }
+
     function selecionar($id_prod = null)
     {
-        $produto = new Produto();
-        return $produto->selecionar($id_prod);
+
+        return $this->produto->selecionar($id_prod);
     }
 
     function cadastrar($valores)
     {
-        $produto = new Produto();
-        $resultado = $produto->inserir($valores);
-        //include("produto.php");
+        $resultado = $this->produto->inserir($valores);
     }
 }
