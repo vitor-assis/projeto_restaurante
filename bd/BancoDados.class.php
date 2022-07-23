@@ -13,6 +13,4 @@ class BancoDados
 
         return $conn;
     }
-
-
 }
