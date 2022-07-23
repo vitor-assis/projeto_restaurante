@@ -1,5 +1,13 @@
 <?php
-session_start();
+
+//session_start();
+
+require_once("usuario/UsuarioController.class.php");
+$usuario_control = new UsuarioController();
+if (count($_POST) > 0) {
+    $valores = $_POST;
+    $resultado = $usuario_control->login($valores);
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +25,7 @@ session_start();
 <body>
     <div class="container">
         <h2>Efetue login</h2>
-        <form id="form_login" action="login.php" method="post">
+        <form id="form_login" action="index.php" method="post">
 
             <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required class="form-control">
             <br>
@@ -31,11 +39,9 @@ session_start();
             <?php endif; ?>
 
             <input type="submit" id="submeter" value="Entrar" class="btn btn-primary">
-
         </form>
-
-
     </div>
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

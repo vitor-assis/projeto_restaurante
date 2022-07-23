@@ -3,8 +3,6 @@ session_start();
 
 if (COUNT($_POST) > 0) {
 
-    // 1. pegar valores do form
-
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
