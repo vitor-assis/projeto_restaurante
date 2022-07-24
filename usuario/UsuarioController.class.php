@@ -11,10 +11,10 @@ class UsuarioController
         $this->usuario = new Usuario();
     }
 
-    //function selecionar($id = null)
-    //{
-    //      return $this->usuario->selecionar($id);
-    // }
+    function selecionar($id = null)
+    {
+        return $this->usuario->selecionarUs($id);
+    }
 
     function cadastrar($valores)
     {
@@ -32,9 +32,9 @@ class UsuarioController
         $filtro["senha"] = $valores["senha"];
         $filtro["situacao"] = 'habilitado';
 
-        $usuario = $this->usuario->selecionar($filtro);
+        $usuario = $this->usuario->selecionarUs($filtro);
 
-        if (COUNT($usuario) > 0) {
+        if (COUNT($usuario) == 1) {
             $_SESSION["email_usuario"] = $valores["email"];
             $_SESSION["nome_usuario"] = $usuario[0]['nome'];
             $_SESSION["id_usuario"] = $usuario[0]['id'];
@@ -46,6 +46,5 @@ class UsuarioController
         }
 
         return $resultado;
-
     }
 }
