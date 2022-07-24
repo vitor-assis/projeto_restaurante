@@ -11,14 +11,27 @@ class UsuarioController
         $this->usuario = new Usuario();
     }
 
-    function selecionar($id = null)
+    function selecionarUs($id = null)
     {
         return $this->usuario->selecionarUs($id);
     }
 
-    function cadastrar($valores)
+    function cadastrarUs($valores)
     {
-        $resultado = $this->usuario->inserir($valores);
+        $filtro = array();
+        $filtro["email"] = $valores["email"];
+
+        $usuario = $this->usuario->selecionarUs($filtro);
+
+        if (COUNT($usuario) > 0) {
+            $resultado["msg"] = "Erro ao inserir usuário. E-mail já cadastrado.";
+            $resultado["cod"] = 0;
+            $resultado["style"] = "alert-danger";
+        } else {
+            $resultado = $this->usuario->inserirUs($valores);
+        }
+
+        return $resultado;
     }
 
     function login($valores)

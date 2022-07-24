@@ -21,5 +21,7 @@ class ProdutoController
     function cadastrar($valores)
     {
         $resultado = $this->produto->inserir($valores);
+
+        return $resultado;
     }
 }

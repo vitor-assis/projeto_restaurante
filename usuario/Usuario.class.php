@@ -21,23 +21,24 @@ class Usuario
         $this->bd = new BancoDados();
     }
 
-    function receberValoresDoPost($valores)
+    function receberValoresDoPostUs($valores)
     {
-        if (!isset($_SESSION["id_usuatio"])) session_start();
+        if (!isset($_SESSION["id_usuario"])) session_start();
 
-        $this->id_prod = isset($valores["id_prod"]) ? $valores["id_prod"] : 0;
-        $this->nome = $valores["nome_produto"];
-        $this->categoria = $valores["categoria_produto"];
-        $this->valor = $valores["valor_produto"];
-        $this->foto = $valores["foto_produto"];
-        $this->info = $valores["info_produto"];
-        $this->id_usuario = $_SESSION["id_usuario"];
+        $this->id = isset($valores["id_usuario"]) ? $valores["id_usuario"] : 0;
+        $this->nome = $valores["nome_usuario"];
+        $this->email = $valores["email_usuario"];
+        $this->senha = $valores["senha_usuario"];
+        //$this->dataRegistro = isset($valores["dataRegistro"]) ? $valores["dataRegistro"] : "now()";
+        //$this->dataAlteracao = isset($valores["dataAlteracao"]) ? $valores["dataAlteracao"] : "now()";
+        //$this->situacao = isset($valores["situacao"]) ? $valores["situacao"] : "habilitado";
+
     }
 
     function selecionarUs($filtro = array())
     {
 
-        $where_cod = "(1 = 1)";
+        $where_cod = "(situacao = 'habilitado')";
 
         if (isset($filtro["id"]))
             $where_cod = $where_cod . " AND id = :id";
@@ -46,7 +47,7 @@ class Usuario
         if (isset($filtro["senha"]))
             $where_cod = $where_cod . " AND senha = MD5(:senha)";
         if (isset($filtro["situacao"]))
-              $where_cod = $where_cod . " AND situacao = :situacao";
+            $where_cod = $where_cod . " AND situacao = :situacao";
 
 
         try {
@@ -76,26 +77,28 @@ class Usuario
         return $resultado;
     }
 
-    function inserir($produto)
+    function inserirUs($usuario)
     {
         session_start();
-        $this->receberValoresDoPost($produto);
+        $this->receberValoresDoPostUs($usuario);
 
         try {
 
             $conn = $this->bd->conectar();
 
-            $sql = "INSERT INTO produtos (nome, categoria, valor, foto, info_adicional, id_usuario) 
-            VALUES (?,?,?,?,?,?)";
+            $sql = "INSERT INTO usuario (nome, email, senha) 
+            VALUES (?,?, MD5(?))";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$this->nome, $this->categoria, $this->valor, $this->foto, $this->info, $this->id_usuario]);
+            $stmt->execute([$this->nome, $this->email, $this->senha]);
 
-            $resultado["msg"] = "Sucesso ao inserir produto";
+            //, $this->dataRegistro, $this->dataAlteracao, $this->situacao
+
+            $resultado["msg"] = "Sucesso ao inserir usuario";
             $resultado["cod"] = 1;
             $resultado["style"] = "alert-success";
         } catch (PDOException $e) {
 
-            $resultado["msg"] = "Erro ao inserir produto" . $e->getMessage();;
+            $resultado["msg"] = "Erro ao inserir usuario" . $e->getMessage();;
             $resultado["cod"] = 0;
             $resultado["style"] = "alert-danger";
         }
@@ -107,7 +110,7 @@ class Usuario
     {
 
         session_start();
-        $this->receberValoresDoPost($produto);
+        $this->receberValoresDoPostUs($produto);
 
         try {
 
