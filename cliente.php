@@ -25,6 +25,7 @@ if (isset($_SESSION["nome_usuario"])) :
 
     <body>
         <div class="container">
+            <?php require_once('html/navbar.html'); ?>
             <form action="cliente.php" method="post">
                 <h2>Gestão de Clientes</h2>
                 <br>

@@ -25,6 +25,7 @@ if (isset($_SESSION["nome_usuario"])) :
     <body>
         <div class="container">
             <form action="produto.php" method="post">
+                <?php require_once('html/navbar.html'); ?>
                 <h2>Cadastro de produtos</h2>
                 <br>
                 <div class="form-group">

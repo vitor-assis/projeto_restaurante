@@ -17,6 +17,7 @@ if (isset($_SESSION["nome_usuario"])) :
     <body>
 
         <div class="container">
+            <?php require_once('html/navbar.html'); ?>
             <form action="cadastrar_pedido.php" method="post">
                 <h5>Olá, <?= $_SESSION["nome_usuario"]; ?></h5>
                 <h2>Escolha de itens do pedidos</h2>
