@@ -98,7 +98,6 @@ if (isset($_SESSION["nome_usuario"])) :
         function removerUsuario(nomeUsuario, idUsuario) {
             if (confirm("Deseja remover o usuário " + nomeUsuario + "?")) {
                 var ajax = new XMLHttpRequest();
-
                 ajax.responseType = "json";
                 ajax.open("GET", "usuario_remover.php?id_usuario=" + idUsuario, true);
                 ajax.send();
@@ -106,7 +105,7 @@ if (isset($_SESSION["nome_usuario"])) :
                     if (ajax.status === 200 && ajax.readyState === 4) {
                         resposta = ajax.response.msg;
                         alert(resposta);
-                        var linha = document.getElementById("usuario" + idUsuario);
+                        var linha = document.getElementById("usuarios" + idUsuario);
                         linha.parentNode.removeChild(linha);
                     }
                 });

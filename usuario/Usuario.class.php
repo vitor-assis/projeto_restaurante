@@ -161,23 +161,23 @@ class Usuario
         return $resultado;
     }
 
-    function remover($id_prod)
+    function removerUs($id_usuario)
     {
 
         try {
 
             $conn = $this->bd->conectar();
 
-            $sql = "UPDATE produtos SET situacao = 'desabilitado' WHERE produtos.id = ?";
+            $sql = "UPDATE usuario SET situacao = 'desabilitado' WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$id_prod]);
+            $stmt->execute([$id_usuario]);
 
-            $resultado["msg"] = "Produto removido com sucesso!";
+            $resultado["msg"] = "Usuário removido com sucesso!";
             $resultado["cod"] = 1;
             $resultado["style"] = "alert-success";
         } catch (PDOException $e) {
 
-            $resultado["msg"] = "Erro ao remover produto" . $e->getMessage();;
+            $resultado["msg"] = "Erro ao remover usuário" . $e->getMessage();;
             $resultado["cod"] = 0;
             $resultado["style"] = "alert-danger";
         }
