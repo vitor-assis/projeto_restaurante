@@ -50,10 +50,6 @@ class UsuarioController
         $filtro["senha"] = $valores["senha"];
         $filtro["situacao"] = 'habilitado';
 
-        echo ("<pre>");
-        print_r($filtro);
-        echo ("</pre>");
-
         $usuario = $this->usuario->selecionarUs($filtro);
 
         if (COUNT($usuario) == 1) {
