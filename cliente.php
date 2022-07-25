@@ -3,11 +3,11 @@ session_start();
 if (isset($_SESSION["nome_usuario"])) :
 ?>
     <?php
-    require_once("usuario/UsuarioController.class.php");
-    $usuario_control = new UsuarioController();
+    require_once("cliente/ClienteController.class.php");
+    $cliente_control = new ClienteController();
     if (count($_POST) > 0) {
         $valores = $_POST;
-        $resultado = $usuario_control->cadastrarUs($valores);
+        $resultado = $cliente_control->cadastrarCl($valores);
     }
     ?>
 
@@ -18,32 +18,37 @@ if (isset($_SESSION["nome_usuario"])) :
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Usuário</title>
+        <title>Clientes</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     </head>
 
     <body>
         <div class="container">
-            <form action="usuario.php" method="post">
-                <h2>Gestão de Usuários</h2>
+            <form action="cliente.php" method="post">
+                <h2>Gestão de Clientes</h2>
                 <br>
                 <div class="form-group">
-                    <label for="nome_usuario">Nome do usuário</label>
-                    <input required type="text" class="form-control" id="nome_usuario" name="nome_usuario" placeholder="Digite o nome do usuário">
+                    <label for="nome_cliente">Nome do cliente</label>
+                    <input required type="text" class="form-control" id="nome_cliente" name="nome_cliente" placeholder="Digite o nome do cliente">
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="email_usuario">E-mail do usuário</label>
-                    <input required type="text" class="form-control" id="email_usuario" name="email_usuario" placeholder="Digite o e-mail do usuário">
+                    <label for="cpf_cliente">CPF do cliente</label>
+                    <input required type="text" class="form-control" id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do cliente">
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="senha_usuario">Senha do usuário</label>
-                    <input required type="password" class="form-control" id="senha_usuario" name="senha_usuario" placeholder="Digite o senha do usuário">
+                    <label for="telefone_cliente">Telefone do cliente</label>
+                    <input required type="tel" class="form-control" id="telefone_cliente" name="telefone_cliente" placeholder="Digite o telefone do cliente">
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary">Adicionar usuário</button>
+                <div class="form-group">
+                    <label for="endereco_cliente">Endereço do cliente</label>
+                    <input required type="text" class="form-control" id="endereco_cliente" name="endereco_cliente" placeholder="Digite o endereço do cliente">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Adicionar cliente</button>
                 <br><br>
                 <?php if (isset($resultado)) : ?>
                     <div class="alert <?= $resultado["style"] ?>">
@@ -53,31 +58,35 @@ if (isset($_SESSION["nome_usuario"])) :
             </form>
             <br><br>
 
-            <?php $usuarios = $usuario_control->selecionarUs() ?>
+            <?php $cliente = $cliente_control->selecionarCl() ?>
 
-            <?php if (COUNT($usuarios) > 0) : ?>
-                <h4>Usuários cadastrados</h4>
+            <?php if (COUNT($cliente) > 0) : ?>
+                <h4>Clientes cadastrados</h4>
                 <table id="tab_produto" class="table">
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>E-mail</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Endereço</th>
                         <th>Data de registro</th>
-                        <th>Data de alteraçãoo</th>
-                        <th>Situação</th>
-                        <th>Editar</th>
+                        <th>Data de alteração</th>
+                        <th>Situacao</th>
+                        <th>Alterar</th>
                     </tr>
-                    <?php foreach ($usuarios as $u) : ?>
-                        <tr id="usuarios<?= $u['id'] ?>">
-                            <td><?= $u["id"]; ?></td>
-                            <td><?= $u["nome"]; ?></td>
-                            <td><?= $u["email"]; ?></td>
-                            <td><?= $u["dataRegistro"]; ?></td>
-                            <td><?= $u["dataAlteracao"]; ?></td>
-                            <td><?= $u["situacao"]; ?></td>
+                    <?php foreach ($cliente as $c) : ?>
+                        <tr id="usuarios<?= $c['id'] ?>">
+                            <td><?= $c["id"]; ?></td>
+                            <td><?= $c["nome"]; ?></td>
+                            <td><?= $c["cpf"]; ?></td>
+                            <td><?= $c["telefone"]; ?></td>
+                            <td><?= $c["endereco"]; ?></td>
+                            <td><?= $c["dataRegistro"]; ?></td>
+                            <td><?= $c["dataAlteracao"]; ?></td>
+                            <td><?= $c["situacao"]; ?></td>
                             <td>
-                                <a class="btn btn-warning btn-sm" href="usuario_alterar.php?id_usuario=<?= $u["id"]; ?>">Alterar</a>
-                                <a class="btn btn-danger btn-sm" onclick="removerUsuario('<?= $u['nome'] ?>', <?= $u['id'] ?>)">Remover</a>
+                                <a class="btn btn-warning btn-sm" href="cliente_alterar.php?id_cliente=<?= $c["id"]; ?>">Alterar</a>
+                                <a class="btn btn-danger btn-sm" onclick="removerCliente('<?= $c['nome'] ?>', <?= $c['id'] ?>)">Remover</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
