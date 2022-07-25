@@ -10,7 +10,5 @@ if (isset($_SESSION["id_usuario"]) && $_SESSION["id_usuario"] > 0) {
         $resultado = $produto->remover($id_prod);
 
         echo json_encode($resultado);
-
-        //header("location: produto.php");
     }
 }

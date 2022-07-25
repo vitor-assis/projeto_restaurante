@@ -75,7 +75,7 @@ if (isset($_SESSION["nome_usuario"])) :
                         <th>Alterar</th>
                     </tr>
                     <?php foreach ($cliente as $c) : ?>
-                        <tr id="usuarios<?= $c['id'] ?>">
+                        <tr id="cliente<?= $c['id'] ?>">
                             <td><?= $c["id"]; ?></td>
                             <td><?= $c["nome"]; ?></td>
                             <td><?= $c["cpf"]; ?></td>
@@ -99,17 +99,17 @@ if (isset($_SESSION["nome_usuario"])) :
 
 
     <script>
-        function removerUsuario(nomeUsuario, idUsuario) {
-            if (confirm("Deseja remover o usuário " + nomeUsuario + "?")) {
+        function removerCliente(nomeCliente, idCliente) {
+            if (confirm("Deseja remover o cliente " + nomeCliente + "?")) {
                 var ajax = new XMLHttpRequest();
                 ajax.responseType = "json";
-                ajax.open("GET", "usuario_remover.php?id_usuario=" + idUsuario, true);
+                ajax.open("GET", "cliente_remover.php?id_cliente=" + idCliente, true);
                 ajax.send();
                 ajax.addEventListener("readystatechange", function() {
                     if (ajax.status === 200 && ajax.readyState === 4) {
                         resposta = ajax.response.msg;
                         alert(resposta);
-                        var linha = document.getElementById("usuarios" + idUsuario);
+                        var linha = document.getElementById("cliente" + idCliente);
                         linha.parentNode.removeChild(linha);
                     }
                 });
