@@ -68,6 +68,7 @@ if (isset($_SESSION["nome_usuario"])) :
                         <th>Nome</th>
                         <th>E-mail</th>
                         <th>Data de registro</th>
+                        <th>Data de alteraçãoo</th>
                         <th>Situação</th>
                         <th>Editar</th>
                     </tr>
@@ -77,6 +78,7 @@ if (isset($_SESSION["nome_usuario"])) :
                             <td><?= $u["nome"]; ?></td>
                             <td><?= $u["email"]; ?></td>
                             <td><?= $u["dataRegistro"]; ?></td>
+                            <td><?= $u["dataAlteracao"]; ?></td>
                             <td><?= $u["situacao"]; ?></td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="usuario_alterar.php?id_usuario=<?= $u["id"]; ?>">Alterar</a>

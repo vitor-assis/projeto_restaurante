@@ -16,6 +16,11 @@ class UsuarioController
         return $this->usuario->selecionarUs($id);
     }
 
+    function selecionarUsEdit($id_usuario = null)
+    {
+        return $this->usuario->selecionarUsEdit($id_usuario);
+    }
+
     function cadastrarUs($valores)
     {
         $filtro = array();
