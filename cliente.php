@@ -27,7 +27,6 @@ if (isset($_SESSION["nome_usuario"])) :
         <div class="container">
             <?php require_once('navbar.html'); ?>
             <br><br>
-
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
@@ -38,7 +37,6 @@ if (isset($_SESSION["nome_usuario"])) :
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <form action="cliente.php" method="post">
-                                <br>
                                 <div class="form-group">
                                     <label for="nome_cliente">Nome do cliente</label>
                                     <input required type="text" class="form-control" id="nome_cliente" name="nome_cliente" placeholder="Digite o nome do cliente">
@@ -60,7 +58,7 @@ if (isset($_SESSION["nome_usuario"])) :
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Adicionar cliente</button>
-                                <br><br>
+                                <br>
                                 <?php if (isset($resultado)) : ?>
                                     <div class="alert <?= $resultado["style"] ?>">
                                         <?php echo $resultado["msg"] ?>

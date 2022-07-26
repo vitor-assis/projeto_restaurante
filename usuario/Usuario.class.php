@@ -64,7 +64,7 @@ class Usuario
     function selecionarUs($filtro = array())
     {
 
-        $where_cod = "(1 = 1)";
+        $where_cod = "(situacao = 'habilitado   ')";
 
         if (isset($filtro["id"]))
             $where_cod = $where_cod . " AND id = :id";

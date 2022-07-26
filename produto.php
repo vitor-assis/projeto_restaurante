@@ -37,7 +37,6 @@ if (isset($_SESSION["nome_usuario"])) :
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <form method="post" enctype="multipart/form-data">
-                                <br>
                                 <div class="form-group">
                                     <label for="nome_produto">Nome do produto</label>
                                     <input required type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Digite o nome do produto">
@@ -64,7 +63,7 @@ if (isset($_SESSION["nome_usuario"])) :
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Adicionar produto</button>
-                                <br><br>
+                                <br>
                                 <?php if (isset($resultado)) : ?>
                                     <div class="alert <?= $resultado["style"] ?>">
                                         <?php echo $resultado["msg"] ?>

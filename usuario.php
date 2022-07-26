@@ -37,7 +37,6 @@ if (isset($_SESSION["nome_usuario"])) :
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <form action="usuario.php" method="post">
-                                <br>
                                 <div class="form-group">
                                     <label for="nome_usuario">Nome do usuário</label>
                                     <input required type="text" class="form-control" id="nome_usuario" name="nome_usuario" placeholder="Digite o nome do usuário">
@@ -54,7 +53,7 @@ if (isset($_SESSION["nome_usuario"])) :
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Adicionar usuário</button>
-                                <br><br>
+                                <br>
                                 <?php if (isset($resultado)) : ?>
                                     <div class="alert <?= $resultado["style"] ?>">
                                         <?php echo $resultado["msg"] ?>
