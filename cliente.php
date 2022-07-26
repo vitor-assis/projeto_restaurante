@@ -25,74 +25,95 @@ if (isset($_SESSION["nome_usuario"])) :
 
     <body>
         <div class="container">
-            <?php require_once('html/navbar.html'); ?>
-            <form action="cliente.php" method="post">
-                <h2>Gestão de Clientes</h2>
-                <br>
-                <div class="form-group">
-                    <label for="nome_cliente">Nome do cliente</label>
-                    <input required type="text" class="form-control" id="nome_cliente" name="nome_cliente" placeholder="Digite o nome do cliente">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="cpf_cliente">CPF do cliente</label>
-                    <input required type="text" class="form-control" id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do cliente">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="telefone_cliente">Telefone do cliente</label>
-                    <input required type="tel" class="form-control" id="telefone_cliente" name="telefone_cliente" placeholder="Digite o telefone do cliente">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="endereco_cliente">Endereço do cliente</label>
-                    <input required type="text" class="form-control" id="endereco_cliente" name="endereco_cliente" placeholder="Digite o endereço do cliente">
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Adicionar cliente</button>
-                <br><br>
-                <?php if (isset($resultado)) : ?>
-                    <div class="alert <?= $resultado["style"] ?>">
-                        <?php echo $resultado["msg"] ?>
-                    </div>
-                <?php endif ?>
-            </form>
+            <?php require_once('navbar.html'); ?>
             <br><br>
 
-            <?php $cliente = $cliente_control->selecionarCl() ?>
-
-            <?php if (COUNT($cliente) > 0) : ?>
-                <h4>Clientes cadastrados</h4>
-                <table id="tab_produto" class="table">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Endereço</th>
-                        <th>Data de registro</th>
-                        <th>Data de alteração</th>
-                        <th>Situacao</th>
-                        <th>Alterar</th>
-                    </tr>
-                    <?php foreach ($cliente as $c) : ?>
-                        <tr id="cliente<?= $c['id'] ?>">
-                            <td><?= $c["id"]; ?></td>
-                            <td><?= $c["nome"]; ?></td>
-                            <td><?= $c["cpf"]; ?></td>
-                            <td><?= $c["telefone"]; ?></td>
-                            <td><?= $c["endereco"]; ?></td>
-                            <td><?= $c["dataRegistro"]; ?></td>
-                            <td><?= $c["dataAlteracao"]; ?></td>
-                            <td><?= $c["situacao"]; ?></td>
-                            <td>
-                                <a class="btn btn-warning btn-sm" href="cliente_alterar.php?id_cliente=<?= $c["id"]; ?>">Alterar</a>
-                                <a class="btn btn-danger btn-sm" onclick="removerCliente('<?= $c['nome'] ?>', <?= $c['id'] ?>)">Remover</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-            <?php endif; ?>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <h4>Cadastrar clientes</h4>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <form action="cliente.php" method="post">
+                                <br>
+                                <div class="form-group">
+                                    <label for="nome_cliente">Nome do cliente</label>
+                                    <input required type="text" class="form-control" id="nome_cliente" name="nome_cliente" placeholder="Digite o nome do cliente">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="cpf_cliente">CPF do cliente</label>
+                                    <input required type="text" class="form-control" id="cpf_cliente" name="cpf_cliente" placeholder="Digite o CPF do cliente">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="telefone_cliente">Telefone do cliente</label>
+                                    <input required type="tel" class="form-control" id="telefone_cliente" name="telefone_cliente" placeholder="Digite o telefone do cliente">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="endereco_cliente">Endereço do cliente</label>
+                                    <input required type="text" class="form-control" id="endereco_cliente" name="endereco_cliente" placeholder="Digite o endereço do cliente">
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Adicionar cliente</button>
+                                <br><br>
+                                <?php if (isset($resultado)) : ?>
+                                    <div class="alert <?= $resultado["style"] ?>">
+                                        <?php echo $resultado["msg"] ?>
+                                    </div>
+                                <?php endif ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            <h4>Clientes cadastrados</h4>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <?php $cliente = $cliente_control->selecionarCl() ?>
+                            <?php if (COUNT($cliente) > 0) : ?>
+                                <table id="tab_produto" class="table">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Telefone</th>
+                                        <th>Endereço</th>
+                                        <th>Data de registro</th>
+                                        <th>Data de alteração</th>
+                                        <th>Situacao</th>
+                                        <th>Alterar</th>
+                                    </tr>
+                                    <?php foreach ($cliente as $c) : ?>
+                                        <tr id="cliente<?= $c['id'] ?>">
+                                            <td><?= $c["id"]; ?></td>
+                                            <td><?= $c["nome"]; ?></td>
+                                            <td><?= $c["cpf"]; ?></td>
+                                            <td><?= $c["telefone"]; ?></td>
+                                            <td><?= $c["endereco"]; ?></td>
+                                            <td><?= $c["dataRegistro"]; ?></td>
+                                            <td><?= $c["dataAlteracao"]; ?></td>
+                                            <td><?= $c["situacao"]; ?></td>
+                                            <td>
+                                                <a class="btn btn-warning btn-sm" href="cliente_alterar.php?id_cliente=<?= $c["id"]; ?>">Alterar</a>
+                                                <a class="btn btn-danger btn-sm" onclick="removerCliente('<?= $c['nome'] ?>', <?= $c['id'] ?>)">Remover</a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 
@@ -111,7 +132,7 @@ if (isset($_SESSION["nome_usuario"])) :
                         resposta = ajax.response.msg;
                         alert(resposta);
                         var linha = document.getElementById("cliente" + idCliente);
-                        linha.parentNode.removeChild(linha);
+                        linha.remove();
                     }
                 });
             }
