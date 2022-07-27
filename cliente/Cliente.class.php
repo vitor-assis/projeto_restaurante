@@ -117,16 +117,8 @@ class Cliente
     function atualizarCl($valores)
     {
 
-        echo ("<pre> update usr model: ");
-        print_r($valores);
-        echo ("</pre>");
-
         session_start();
         $this->receberValoresDoPostCl($valores);
-
-        echo ("<pre> update vlrPost: ");
-        print_r([$this->nome, $this->cpf, $this->telefone, $this->endereco, $this->dataAlteracao, $this->id_cliente]);
-        echo ("</pre>");
 
         try {
 

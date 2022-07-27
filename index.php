@@ -6,6 +6,11 @@ if (count($_POST) > 0) {
     $valores = $_POST;
     $resultado = $usuario_control->login($valores);
 }
+
+if(count($_GET) > 0){
+    session_destroy();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -24,19 +29,19 @@ if (count($_POST) > 0) {
 <body class="text-center">
     <main class="form-sigin">
         <div>
-            <h2>EFETUE LOGIN</h2>
+            <h2>LOGIN</h2>
             <form id="form_login" class="form-signin floating" action="index.php" method="post">
                 <input type="email" id="email" name="email" placeholder="Digite seu e-mail" class="form-control">
                 <br>
                 <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required class="form-control">
                 <br>
+                <input type="submit" id="submeter" value="Entrar" class="btn btn-primary">
+                <br><br>
                 <?php if (isset($resultado) && $resultado["cod"] == 0) : ?>
                     <div class="alert alert-danger">
                         <?php echo $resultado["msg"]; ?>
                     </div>
                 <?php endif; ?>
-
-                <input type="submit" id="submeter" value="Entrar" class="btn btn-primary">
             </form>
         </div>
     </main>

@@ -31,7 +31,7 @@ if (isset($_SESSION["nome_usuario"])) :
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            <h4>Cadastrar clientes</h4>
+                            <h4><img src="images/add.png" alt="" width="15" height="15" class="d-inline-block"> Cadastrar clientes</h4>
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -71,7 +71,7 @@ if (isset($_SESSION["nome_usuario"])) :
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                            <h4>Clientes cadastrados</h4>
+                            <h4><img src="images/list.png" alt="" width="15" height="15" class="d-inline-block"> Clientes cadastrados</h4>
                         </button>
                     </h2>
                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">

@@ -47,7 +47,7 @@ class Usuario
 
             $consulta = $conn->prepare("SELECT * FROM usuario WHERE situacao LIKE 'habilitado'" . $where_cod);
             $consulta->execute();
-
+            
             $resultado = $consulta->fetchAll();
         } catch (PDOException $e) {
 

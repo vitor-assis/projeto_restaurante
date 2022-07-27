@@ -45,8 +45,13 @@ if (isset($_SESSION["nome_usuario"])) : ?>
                 <br>
                 <div class="form-group">
                     <label for="Senha_usuario">Senha do usuário</label>
-                    <input required value="<?= $usuario[0]['senha'] ?>" type="password" class="form-control" id="senha_usuario" name="senha" placeholder="Digite o Senha do usuario">
+                    <input required readonly diseabled value="<?= $usuario[0]['senha'] ?>" type="password" class="form-control" id="senha_usuario" name="senha" placeholder="Digite o Senha do usuario">
                 </div>
+                <br>
+                <div class="alert alert-warning" role="alert">
+                    <span> Para recuperação de senha entre em contato com o administrador do sistema </span>
+                </div>
+
                 <br>
                 <button type="submit" class="btn btn-primary">Alterar usuário</button>
                 <br><br>
