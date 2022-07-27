@@ -15,14 +15,13 @@ if (isset($_SESSION["nome_usuario"])) :
     </head>
 
     <body>
+        <div class="container">
+            <?php require_once('navbar.html'); ?>
+            <br><br>
+            <h5 class="h">Olá, <?= $_SESSION["nome_usuario"]; ?>.<br>Bem-vindo de volta!</h5>
+        </div>
 
     </body>
-
-    <div class="container">
-        <?php require_once('navbar.html'); ?>
-        <br><br>
-    </div>
-
     </html>
 
 <?php else : ?>

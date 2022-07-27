@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
 
 include("bd/BancoDados.class.php");
 
@@ -141,7 +142,7 @@ class Usuario
 
             $conn = $this->bd->conectar();
 
-            $sql = "UPDATE usuario SET nome = ?, email = ?, senha = MD5(?), dataAlteracao = ? WHERE id = ?";
+            $sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, dataAlteracao = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$this->nome, $this->email, $this->senha, $this->dataAlteracao, $this->id_usuario]);
 

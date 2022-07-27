@@ -57,7 +57,7 @@ class UsuarioController
             $_SESSION["nome_usuario"] = $usuario[0]['nome'];
             $_SESSION["id_usuario"] = $usuario[0]['id'];
 
-            header("Location: produto.php");
+            header("Location: home.php");
         } else if (COUNT($usuario) == 0) {
             $resultado["msg"] = "Usuário não encontrado";
             $resultado["cod"] = 0;

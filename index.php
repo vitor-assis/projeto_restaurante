@@ -7,7 +7,7 @@ if (count($_POST) > 0) {
     $resultado = $usuario_control->login($valores);
 }
 
-if(isset($_GET) && $_GET['e'] == 1){
+if (isset($_GET) && $_GET['e'] == 1) {
     session_destroy();
 }
 
@@ -28,14 +28,21 @@ if(isset($_GET) && $_GET['e'] == 1){
 
 <body class="text-center">
     <main class="form-sigin">
-        <div>
-            <h2>LOGIN</h2>
+        <h2>LOGIN</h2>
+        <div class="form-floating mb-3 container">
             <form id="form_login" class="form-signin floating" action="index.php" method="post">
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" class="form-control">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Digite seu e-mail">
+                    <label for="floatingInput">E-mail</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" name="senha" placeholder="Digite sua senha" required>
+                    <label for="floatingPassword">Senha</label>
+                </div>
                 <br>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required class="form-control">
-                <br>
-                <input type="submit" id="submeter" value="Entrar" class="btn btn-primary">
+                <div class="d-grid gap-2">
+                <input type="submit" id="submeter" value="Entrar" class="btn btn-success btn-block">
+                </div>
                 <br><br>
                 <?php if (isset($resultado) && $resultado["cod"] == 0) : ?>
                     <div class="alert alert-danger">
