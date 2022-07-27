@@ -7,7 +7,7 @@ if (count($_POST) > 0) {
     $resultado = $usuario_control->login($valores);
 }
 
-if(count($_GET) > 0){
+if(isset($_GET) && $_GET['e'] == 1){
     session_destroy();
 }
 
